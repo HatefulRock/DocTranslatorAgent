@@ -38,7 +38,7 @@ pip install -r requirements.txt --extra-index-url https://wheels.myhloli.com -i 
 ```commandline
 pip install huggingface_hub
 export HF_ENDPOINT=https://hf-mirror.com
-huggingface-cli download 
+huggingface-cli download juliozhao/DocLayout-YOLO-DocStructBench
 ```
 3. 工作目录设置为backend/api（如使用Pycharm启动） 或 cd backend/api（命令行启动）
 4. 添加backend目录为PYTHONPATH

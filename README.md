@@ -34,11 +34,9 @@ pip install -r requirements.txt --extra-index-url https://wheels.myhloli.com -i 
   - juliozhao/DocLayout-YOLO-DocStructBench Recommended to use a mirror site for domestic users
   - minerU [Model weight file installation](https://mineru.readthedocs.io/zh-cn/latest/user_guide/install/download_model_weight_files.html) (Required when using MinerUReader)
 
-Recommended to use a mirror site for domestic users
 ```commandline
 pip install huggingface_hub
-export HF_ENDPOINT=https://hf-mirror.com
-huggingface-cli download 
+huggingface-cli download juliozhao/DocLayout-YOLO-DocStructBench
 ```
 3. Set working directory to backend/api (if starting with Pycharm) or cd backend/api (starting from command line)
 4. Add backend directory to PYTHONPATH
