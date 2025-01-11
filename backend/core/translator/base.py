@@ -26,5 +26,5 @@ class BaseTranslator:
     async def async_translate(self,
                               texts: List[str],
                               source_lang: str,
-                              target_lang: str) -> List[TranslateResult]:
+                              target_lang: str):
         pass

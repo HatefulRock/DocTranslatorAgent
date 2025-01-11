@@ -19,16 +19,16 @@ from hashlib import md5
 class BaiduTranslator(BaseTranslator):
 
     def translate(self, texts: List[str], source_lang: str, target_lang: str) -> List[TranslateResult]:
-        for i, text in enumerate(texts):
-            translate_result = BaiduTranslator.baidu_translate(text, source_lang, target_lang)
-            yield TranslateResult(index=i, result=translate_result)
-
-    async def async_translate(self, texts: List[str], source_lang: str, target_lang: str) -> List[TranslateResult]:
         result = []
         for i, text in enumerate(texts):
             translate_result = BaiduTranslator.baidu_translate(text, source_lang, target_lang)
             result.append(TranslateResult(index=i, result=translate_result))
         return result
+
+    async def async_translate(self, texts: List[str], source_lang: str, target_lang: str):
+        for i, text in enumerate(texts):
+            translate_result = BaiduTranslator.baidu_translate(text, source_lang, target_lang)
+            yield TranslateResult(index=i, result=translate_result)
 
     @staticmethod
     def baidu_translate(text, source_lang, target_lang):
@@ -61,4 +61,5 @@ class BaiduTranslator(BaseTranslator):
         # Send request
         r = requests.post(url, params=payload, headers=headers)
         result = r.json()
-        return result['trans_result'][0]['dst']
+        res_text = '\n'.join([item['dst'] for item in result['trans_result']])
+        return res_text

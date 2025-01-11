@@ -1,21 +1,27 @@
  [English](README.md) | 简体中文
 # DocTranslaterAgent
+pdf在线同屏翻译展示，保留原文本排版
+
+## 预览
+<img src="img.png"/>
 
 ## 项目结构
 - backend 后端项目
   - python3.10
-- web 前端项目(开发中)
+- web 前端项目
+  - node > V16.3.0
+  - npm > 7.15.1
 
 ## 核心代码
 - BaseReader--pdf文本块读取
-  - PdfDefaultTextReader： 默认文本类型pdf阅读器，基于YOLO识别出文本区块，通过pdfminer获取区块文本信息
+  - PdfDefaultTextReader（速度最快）： 默认文本类型pdf阅读器，基于YOLO识别出文本区块，通过pdfminer获取区块文本信息
   - PdfDefaultOcrReader： 默认图片类型pdf阅读器，基于YOLO识别出文本区块，通过paddleocr识别区块文本信息
   - MinerUReader（推荐）： 解析MinerU返回结果，构建区块信息（支持公式识别，OCR结果准确率较高）
     - MinerOcrUReader: 使用ocr解析
     - MinerTextUReader: 文本pdf解析，省去ocr步骤
 - BaseTranslator--文本批量翻译
   - LlmTranslator：大模型翻译器（对应配置 llm、openai）
-  - BaiduTranslator: 百度翻译器（对应配置 baidu）
+  - BaiduTranslator: [百度翻译器](https://fanyi-api.baidu.com/product/11)（对应配置 baidu）
 - Configuration--配置管理
 
 ## 快速开始
@@ -33,8 +39,6 @@ pip install -r requirements.txt --extra-index-url https://wheels.myhloli.com -i 
 pip install huggingface_hub
 export HF_ENDPOINT=https://hf-mirror.com
 huggingface-cli download 
-
--
 ```
 3. 工作目录设置为backend/api（如使用Pycharm启动） 或 cd backend/api（命令行启动）
 4. 添加backend目录为PYTHONPATH
@@ -44,7 +48,14 @@ python app.py
 ```
 
 ### 前端项目
-开发中
+1. 依赖安装
+```commandline
+npm install
+```
+2. 依赖安装
+```commandline
+npm start
+```
 
 
 ## 外部引用

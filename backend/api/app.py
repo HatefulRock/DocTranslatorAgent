@@ -7,8 +7,7 @@
 # Author     ：vince
 # Description：
 """
-import asyncio
-import json
+import traceback
 
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Request
 from fastapi.encoders import jsonable_encoder
@@ -65,8 +64,8 @@ async def translate(
                     break
                 data = f'{event.model_dump_json()}'
                 yield data
-        except asyncio.CancelledError:
-            pass
+        except BaseException as e:
+            print(traceback.print_exc())
 
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 
@@ -81,14 +80,14 @@ def get_translators():
 @app.get('/support_language')
 def get_translators():
     return JSONResponse(content=[
-        {"English": "en"},
-        {"Chinese": "zh"},
-        {"Japanese": "jp"},
-        {"Korean": "kor"},
-        {"French": "fra"}
+        {"label": "English", "value": "en"},
+        {"label": "Chinese", "value": "zh"},
+        {"label": "Japanese", "value": "jp"},
+        {"label": "Korean", "value": "kor"},
+        {"label": "French", "value": "fra"}
     ])
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="192.168.0.107", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
